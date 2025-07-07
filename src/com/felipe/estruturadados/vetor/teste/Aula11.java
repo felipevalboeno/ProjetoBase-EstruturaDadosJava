@@ -11,6 +11,10 @@ public class Aula11 {
 		vetor.adiciona("Elemento 2");
 
 		System.out.println(vetor);
+		
+		vetor.limpar();
+		
+		System.out.println(vetor);
 	}
 
 }

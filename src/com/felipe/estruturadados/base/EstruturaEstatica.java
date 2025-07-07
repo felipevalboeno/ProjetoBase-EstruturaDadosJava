@@ -1,46 +1,25 @@
-package com.felipe.estruturadados.vetor;
+package com.felipe.estruturadados.base;
 
-public class Lista<T> {
+public class EstruturaEstatica<T> {
+	
+
+	protected T[] elementos;
+	protected int tamanho;
 	
 	
-	private T[] elementos;
-	private int tamanho;
+	
+	public EstruturaEstatica() {
+		this(10);
+	}
 
-	public Lista(int capacidade) {
+	public EstruturaEstatica(int capacidade) {
 		this.elementos = (T[]) new Object[capacidade];
 		this.tamanho = 0;
 	}
 	
-	
-	public void limpar() {
-		
-		this.elementos = (T[]) new Object[this.elementos.length];
-		
-	}
-	
 
-//	public void adiciona(Object elemento) {
-//		for (int i = 0; i < this.elementos.length; i++) {
-//			if (this.elementos[i] == null) {
-//				this.elementos[i] = elemento;
-//				break;
-//			}
-//
-//		}
-//
-//	}
-
-//	public void adiciona(Object elemento) throws Exception{
-//		if(this.tamanho < this.elementos.length) {
-//		this.elementos[this.tamanho] = elemento;
-//		this.tamanho++;
-//		}else {
-//			throw new Exception("Vetor cheio, nã é possível adicionar elementos");
-//			
-//		}
-//	}
 	
-	public boolean adiciona(T elemento){
+	protected boolean adiciona(T elemento){
 		this.aumentaCapacidade();
 		if(this.tamanho < this.elementos.length) {
 		this.elementos[this.tamanho] = elemento;
@@ -52,7 +31,7 @@ public class Lista<T> {
 	}
 	
 	
-	public boolean adiciona(int posicao, T elemento){
+	protected boolean adiciona(int posicao, T elemento){
 		if(!(posicao>=0 && posicao <tamanho)) {
 			throw new IllegalArgumentException("Posição Inválida");
 		}
@@ -70,35 +49,22 @@ public class Lista<T> {
 		return false;
 	}
 	
-//remove vetor com base na posição
-	public void remove(int posicao) {
-		if(!(posicao>=0 && posicao<tamanho)) {
-			throw new IllegalArgumentException("Posição inválida");
-		}
-		for(int i=posicao; i<this.tamanho-1;i++) {
-			this.elementos[i] = this.elementos[i+1];			
-		}
-		this.tamanho--;
-		
-	}
-	
-	
 	
 	public int tamanho() {
 		return this.tamanho;
 		
 	}
 	
-	//busca elementos por posição do array
-	public T busca(int posicao) {
-		if(!(posicao>=0 && posicao<tamanho)) {
-			throw new IllegalArgumentException("Posição inválida");
-		}
-		return this.elementos[posicao];		
+	public boolean estaVazia() {
+		
+		return this.tamanho == 0;
 	}
 	
 	
-	private void aumentaCapacidade() {
+
+	
+	
+	protected void aumentaCapacidade() {
 		if(this.tamanho == this.elementos.length) {
 			T[] elementosNovos= (T[])  new Object[this.elementos.length *2];
 			for(int i=0; i<this.elementos.length; i++) {
@@ -142,8 +108,4 @@ public class Lista<T> {
 		return s.toString();
 	}
 
-
-
-	
-	
 }
